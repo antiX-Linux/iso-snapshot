@@ -1,0 +1,8 @@
+isosnapshot 		usr/bin
+iso-snapshot.desktop	usr/share/applications/antix
+iso-snapshot.conf	etc
+iso-snapshot-exclude.list	usr/local/share/excludes
+translations/*.qm 	usr/share/iso-snapshot-antix/locale
+iso-snapshot.png	usr/share/pixmaps
+icons/*			usr/share/iso-snapshot-antix/icons
+scripts/copy-initrd-modules	usr/sbin

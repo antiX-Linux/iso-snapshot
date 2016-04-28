@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=iso-snapshot
+Comment= Create a live CD snapshot of your system.
+Exec=gksu isosnapshot
+Terminal=false
+Type=Application
+Icon=iso-snapshot.png
+Categories=GNOME;GTK;System;
