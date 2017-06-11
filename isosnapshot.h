@@ -44,6 +44,8 @@ class isosnapshot : public QDialog
 protected:
     QProcess *proc;
     QTimer *timer;
+    void keyPressEvent(QKeyEvent* event);
+
 
 public:
     explicit isosnapshot(QWidget *parent = 0);
@@ -78,14 +80,15 @@ public:
     int getSnapshotCount();
     bool installPackage(QString package);
     bool checkInstalled(QString package);
-    bool replaceStringInFile(QString oldtext, QString newtext, QString filepath);
+    bool replaceStringInFile(QString old_text, QString new_text, QString file_path);
     bool createIso(QString filename);
     bool isLive();
     bool isi686();
+    void closeApp();
     void loadSettings();
     void setup();
     void listUsedSpace();
-    void listFreeSpace();    
+    void listFreeSpace();
     void checkEditor();
     void checkDirectories();
     void checkSaveWork();
@@ -93,11 +96,11 @@ public:
     void closeInitrd(QString initrd_dir, QString file);
     void copyModules(QString to, QString kernel);
     void copyNewIso();
-    void mkDir(QString filename);
-    void savePackageList(QString filename);
+    void mkDir(QString file_name);
+    void savePackageList(QString file_name);
     void setupEnv();
     void cleanUp();
-    void makeMd5sum(QString folder, QString filename);
+    void makeMd5sum(QString folder, QString file_name);
     void fixPermissions();
     void replaceMenuStrings();
     QString getSnapshotSize();
@@ -113,21 +116,24 @@ public slots:
     void onStdoutAvailable();
 
 private slots:
-    void on_buttonNext_clicked();
+
     void on_buttonAbout_clicked();
-    void on_buttonHelp_clicked();
     void on_buttonBack_clicked();
+    void on_buttonCancel_clicked();
     void on_buttonEditConfig_clicked();
     void on_buttonEditExclude_clicked();
+    void on_buttonHelp_clicked();
+    void on_buttonNext_clicked();
+    void on_buttonSelectSnapshot_clicked();   ;
     void on_excludeDocuments_toggled(bool checked);
     void on_excludeDownloads_toggled(bool checked);
     void on_excludePictures_toggled(bool checked);
     void on_excludeMusic_toggled(bool checked);
     void on_excludeVideos_toggled(bool checked);
     void on_excludeDesktop_toggled(bool checked);
-    void on_buttonSelectSnapshot_clicked();
     void on_radioRespin_clicked(bool checked);
     void on_radioPersonal_clicked(bool checked);
+
 
 private:
     Ui::isosnapshot *ui;

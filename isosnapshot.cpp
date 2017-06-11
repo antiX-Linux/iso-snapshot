@@ -29,6 +29,7 @@
 #include <QFileDialog>
 #include <QScrollBar>
 #include <QTextStream>
+#include <QKeyEvent>
 
 #include <QDebug>
 
@@ -69,8 +70,8 @@ void isosnapshot::loadSettings()
 
     session_excludes = "";
     snapshot_dir = settings.value("snapshot_dir", "/home/snapshot").toString();
-    ui->labelSnapshot->setText(tr("The snapshot will be placed by default in ") + snapshot_dir.absolutePath());
-    snapshot_excludes.setFileName(settings.value("snapshot_excludes", "/usr/local/share/excludes/iso-snapshot-exclude.list").toString());
+    ui->labelSnapshotDir->setText(snapshot_dir.absolutePath());
+    snapshot_excludes.setFileName(settings.value("snapshot_excludes", "/usr/local/share/excludes/mx-snapshot-exclude.list").toString());
     snapshot_basename = settings.value("snapshot_basename", "snapshot").toString();
     make_md5sum = settings.value("make_md5sum", "no").toString();
     make_isohybrid = settings.value("make_isohybrid", "yes").toString();
@@ -79,6 +80,7 @@ void isosnapshot::loadSettings()
     lib_mod_dir = settings.value("lib_mod_dir", "/lib/modules/").toString();
     gui_editor.setFileName(settings.value("gui_editor", "/usr/bin/leafpad").toString());
     stamp = settings.value("stamp", "datetime").toString();
+    ui->lineEditName->setText(getFilename());
 }
 
 // setup/refresh versious items first time program runs
@@ -122,9 +124,9 @@ int isosnapshot::runCmd(QString cmd)
 }
 
 // Util function for replacing strings in files
-bool isosnapshot::replaceStringInFile(QString oldtext, QString newtext, QString filepath)
+bool isosnapshot::replaceStringInFile(QString old_text, QString new_text, QString file_path)
 {
-    QString cmd = QString("sed -i 's/%1/%2/g' %3").arg(oldtext).arg(newtext).arg(filepath);
+    QString cmd = QString("sed -i 's/%1/%2/g' \"%3\"").arg(old_text).arg(new_text).arg(file_path);
     if (system(cmd.toUtf8()) != 0) {
         return false;
     }
@@ -146,7 +148,7 @@ bool isosnapshot::isi686()
 // Get version of the program
 QString isosnapshot::getVersion(QString name)
 {
-    QString cmd = QString("dpkg -l iso-snapshot | awk 'NR==6 {print $3}'").arg(name);
+    QString cmd = QString("dpkg -l %1 | awk 'NR==6 {print $3}'").arg(name);
     return getCmdOut(cmd);
 }
 
@@ -165,7 +167,7 @@ QString isosnapshot::getSnapshotSize()
 {
     QString size;
     if (snapshot_dir.exists()) {
-        QString cmd = QString("find %1 -maxdepth 1 -type f -name '*.iso' -exec du -shc {} + | tail -1 | awk '{print $1}'").arg(snapshot_dir.absolutePath());
+        QString cmd = QString("find \"%1\" -maxdepth 1 -type f -name '*.iso' -exec du -shc {} + | tail -1 | awk '{print $1}'").arg(snapshot_dir.absolutePath());
         size = getCmdOut(cmd);
         if (size != "" ) {
             return size;
@@ -183,7 +185,7 @@ void isosnapshot::listUsedSpace()
     ui->buttonSelectSnapshot->setDisabled(true);
     QString cmd;
     if (live) {
-        cmd = QString("du --exclude-from=%1 -sch / 2>/dev/null | tail -n1 | cut -f1").arg(snapshot_excludes.fileName());
+        cmd = QString("du --exclude-from=\"%1\" -sch / 2>/dev/null | tail -n1 | cut -f1").arg(snapshot_excludes.fileName());
     } else {
         cmd = QString("df -h / | awk 'NR==2 {print $3}'");
     }
@@ -208,7 +210,7 @@ void isosnapshot::listFreeSpace()
     QString cmd;
     QString out;
     QString path = snapshot_dir.absolutePath().remove("/snapshot");
-    cmd = QString("df -h %1 | awk 'NR==2 {print $4}'").arg(path);
+    cmd = QString("df -h \"%1\" | awk 'NR==2 {print $4}'").arg(path);
     ui->labelFreeSpace->clear();
     out.append("- " + tr("Free space on %1, where snapshot folder is placed: ").arg(path) + getCmdOut(cmd) + "\n");
     ui->labelFreeSpace->setText(out);
@@ -258,7 +260,7 @@ bool isosnapshot::installPackage(QString package)
     connect(proc, SIGNAL(finished(int)), &loop, SLOT(quit()));
     proc->start("apt-get update");
     loop.exec();
-    proc->start("apt-get install " + package);
+    proc->start("apt-get -y install " + package);
     loop.exec();
     disconnectAll();
     this->hide();
@@ -278,32 +280,30 @@ void isosnapshot::checkDirectories()
     //  Create snapshot dir if it doesn't exist
     if (!snapshot_dir.exists()) {
         snapshot_dir.mkpath(snapshot_dir.absolutePath());
-        QString path = snapshot_dir.absolutePath();
-
-        QString cmd = QString("chmod 777 %1").arg(path);
-        system(cmd.toUtf8());
     }
-
     // Create a work_dir
-    work_dir = getCmdOut("mktemp -d " + snapshot_dir.absolutePath() + "/iso-snapshot-XXXXXXXX");
+    work_dir = getCmdOut("mktemp -d \"" + snapshot_dir.absolutePath() + "/iso-snapshot-XXXXXXXX\"");
+    runCmd("mkdir -p " + work_dir + "/iso-template/antiX");
+    system("cd ..; cd -");
 }
 
 void isosnapshot::openInitrd(QString file, QString initrd_dir)
 {
-    QString cmd = "mkdir -p " + initrd_dir;
-    system(cmd.toUtf8());
-    cmd = "chmod a+rx " + initrd_dir;
+    QString cmd = "chmod a+rx \"" + initrd_dir + "\"";
     system(cmd.toUtf8());
     QDir::setCurrent(initrd_dir);
-    cmd = QString("gunzip -c %1 | cpio -idum").arg(file);
+    cmd = QString("gunzip -c \"%1\" | cpio -idum").arg(file);
     system(cmd.toUtf8());
 }
 
 void isosnapshot::closeInitrd(QString initrd_dir, QString file)
 {
     QDir::setCurrent(initrd_dir);
-    QString cmd = "(find . | cpio -o -H newc --owner root:root | gzip -9) >" + file;
+    QString cmd = "(find . | cpio -o -H newc --owner root:root | gzip -9) >\"" + file + "\"";
     runCmd(cmd);
+    if (initrd_dir.startsWith("/tmp/tmp.")) {
+        system("rm -r " + initrd_dir.toUtf8());
+    }
     makeMd5sum(work_dir + "/iso-template/antiX", "initrd.gz");
 }
 
@@ -319,17 +319,19 @@ void isosnapshot::copyNewIso()
     cmd = "cp /usr/lib/iso-template/initrd.gz iso-template/antiX/";
     runCmd(cmd);
 
-    cmd = "cp /boot/vmlinuz-" + kernel_used + " " + work_dir + "/iso-template/antiX/vmlinuz";
+    cmd = "cp /boot/vmlinuz-" + kernel_used + " iso-template/antiX/vmlinuz";
     runCmd(cmd);
+
     makeMd5sum(work_dir + "/iso-template/antiX", "vmlinuz");
 
-    QString initrd_dir = work_dir + "/initrd";
+    QString initrd_dir = getCmdOut("mktemp -d");
     openInitrd(work_dir + "/iso-template/antiX/initrd.gz", initrd_dir);
-    if (initrd_dir.contains("/iso-snapshot")) {  //just make sure initrd_dir is correct to avoid disaster
+    if (initrd_dir.startsWith("/tmp/tmp.")) {  //just make sure initrd_dir is correct to avoid disaster
         // strip modules
-        runCmd("test -d " + initrd_dir + "/lib/modules && rm -r " + initrd_dir  + "/lib/modules");
+        runCmd("test -d \"" + initrd_dir + "/lib/modules\" && rm -r \"" + initrd_dir  + "/lib/modules\"");
     }
-    runCmd("test -r /usr/local/share/live-files/files/etc/initrd-release && cp /usr/local/share/live-files/files/etc/initrd-release " + initrd_dir + "/etc");
+    runCmd("test -r /usr/local/share/live-files/files/etc/initrd-release && cp /usr/local/share/live-files/files/etc/initrd-release \"" + initrd_dir + "/etc\""); // We cannot count on this file in the future versions
+    runCmd("test -r /etc/initrd-release && cp /etc/initrd-release \"" + initrd_dir + "/etc\""); // overwrite with this file, probably a better location _if_ the file exists
     if (initrd_dir != "") {
         copyModules(initrd_dir, kernel_used);
         closeInitrd(initrd_dir, work_dir + "/iso-template/antiX/initrd.gz");
@@ -339,8 +341,10 @@ void isosnapshot::copyNewIso()
 // copyModules(mod_dir/kernel_used kernel_used)
 void isosnapshot::copyModules(QString to, QString kernel)
 {
-    QString cmd = QString("copy-initrd-modules -t=%1 -k=%2").arg(to).arg(kernel);
+    QString kernel586 = "3.16.0-4-586";
+    QString cmd = QString("copy-initrd-modules -t=\"%1\" -k=\"%2\"").arg(to).arg(kernel);
     system(cmd.toUtf8());
+
 }
 
 // Create the output filename
@@ -349,34 +353,35 @@ QString isosnapshot::getFilename()
     if (stamp == "datetime") {
         return snapshot_basename + "-" + getCmdOut("date +%Y%m%d_%H%M") + ".iso";
     } else {
-        int n = 1;
-        QString name = snapshot_dir.absolutePath() + "/" + snapshot_basename + QString::number(n) + ".iso";
+        QString name;
         QDir dir;
-        dir.setPath(name);
-        while (dir.exists(dir.absolutePath())) {
+        int n = 1;
+        do {
+            name = snapshot_basename + QString::number(n) + ".iso";
+            dir.setPath("\"" + snapshot_dir.absolutePath() + "/" + name + "\"");
             n++;
-            QString name = snapshot_dir.absolutePath() + "/" + snapshot_basename + QString::number(n) + ".iso";
-            dir.setPath(name);
-        }
-        return dir.absolutePath();
+        } while (dir.exists(dir.absolutePath()));
+        return name;
     }
 }
 
 // make working directory using the base filename
-void isosnapshot::mkDir(QString filename)
+void isosnapshot::mkDir(QString file_name)
 {
     QDir dir;
-    filename.chop(4); //remove ".iso" string
-    dir.setPath(work_dir + "/iso-template/" + filename);
+    QFileInfo fi(file_name);
+    QString base_name = fi.completeBaseName(); // remove extension
+    dir.setPath(work_dir + "/iso-template/" + base_name);
     dir.mkpath(dir.absolutePath());
 }
 
 // save package list in working directory
-void isosnapshot::savePackageList(QString filename)
+void isosnapshot::savePackageList(QString file_name)
 {
-    filename.chop(4); //remove .iso
-    filename = work_dir + "/iso-template/" + filename + "/package_list";
-    QString cmd = "dpkg -l | grep \"ii\" | awk '{ print $2 }' >" + filename;
+    QFileInfo fi(file_name);
+    QString base_name = fi.completeBaseName(); // remove extension
+    QString full_name = work_dir + "/iso-template/" + base_name + "/package_list";
+    QString cmd = "dpkg -l | grep ^ii\\ \\ | awk '{print $2,$3}' | sed 's/:'$(dpkg --print-architecture)'//' | column -t >\"" + full_name + "\"";
     system(cmd.toUtf8());
 }
 
@@ -392,7 +397,7 @@ void isosnapshot::setupEnv()
     if (!checkInstalled("antix-installer")) {
         runCmd("apt-get update");
         if (!checkInstalled("antix-installer")) {
-            runCmd("apt-get install antix-installer");
+            runCmd("apt-get -y install antix-installer");
         }
     }
     // setup environment if creating a respin (reset root/demo, remove personal accounts)
@@ -425,12 +430,12 @@ bool isosnapshot::createIso(QString filename)
     makeMd5sum(work_dir + "/iso-template/antiX", "linuxfs");
 
     // mv linuxfs to another folder
-    runCmd("mkdir -p " + work_dir + "/iso-2/antiX");
-    runCmd("mv " + work_dir + "/iso-template/antiX/linuxfs* " + work_dir + "/iso-2/antiX");
+    runCmd("mkdir -p iso-2/antiX");
+    runCmd("mv iso-template/antiX/linuxfs* iso-2/antiX");
 
     // create the iso file
     QDir::setCurrent(work_dir + "/iso-template");
-    cmd = "genisoimage -gid 0 -uid 0 -allow-limited-size -l -V antiX-Linux-live -R -J -pad -no-emul-boot -boot-load-size 4 -boot-info-table -b boot/isolinux/isolinux.bin -c boot/isolinux/isolinux.cat -o " + snapshot_dir.absolutePath() + "/" + filename + " . "  + work_dir + "/iso-2";
+    cmd = "xorriso -as mkisofs -l -V antiXLive -R -J -pad -iso-level 3 -no-emul-boot -boot-load-size 4 -boot-info-table -b boot/isolinux/isolinux.bin  -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -c boot/isolinux/isolinux.cat -o \"" + snapshot_dir.absolutePath() + "/" + filename + "\" . \""  + work_dir + "/iso-2\"";
     ui->outputLabel->setText(tr("Creating CD/DVD image file..."));
     if (runCmd(cmd) != 0) {
         QMessageBox::critical(0, tr("Error"), tr("Could not create ISO file, please check whether you have enough space on the destination partition."));
@@ -440,7 +445,7 @@ bool isosnapshot::createIso(QString filename)
     // make it isohybrid
     if (make_isohybrid == "yes") {
         ui->outputLabel->setText(tr("Making hybrid iso"));
-        cmd = "isohybrid " + snapshot_dir.absolutePath() + "/" + filename;
+        cmd = "isohybrid \"" + snapshot_dir.absolutePath() + "/" + filename + "\"";
         runCmd(cmd);
     }
 
@@ -452,13 +457,13 @@ bool isosnapshot::createIso(QString filename)
 }
 
 // create md5sum for different files
-void isosnapshot::makeMd5sum(QString folder, QString filename)
+void isosnapshot::makeMd5sum(QString folder, QString file_name)
 {
     QDir dir;
     QString current = dir.currentPath();
     dir.setCurrent(folder);
     ui->outputLabel->setText(tr("Making md5sum"));
-    QString cmd = "md5sum " + filename + ">" + folder + "/" + filename + ".md5";
+    QString cmd = "md5sum \"" + file_name + "\">\"" + folder + "/" + file_name + ".md5\"";
     runCmd(cmd);
     dir.setCurrent(current);
 }
@@ -475,13 +480,13 @@ void isosnapshot::cleanUp()
 
     // checks if work_dir looks OK
     if (work_dir.contains("/iso-snapshot")) {        
-        system("rm -r " + work_dir.toUtf8());
+        system("rm -r \"" + work_dir.toUtf8() + "\"");
     }
     if (!live && !reset_accounts) {
         // remove installer icon
         system("rm /home/*/Desktop/minstall.desktop");
     }
-    ui->outputLabel->clear();
+    ui->outputLabel->setText(tr("Done"));
 }
 
 // adds or removes exclusion to the exclusion string
@@ -566,6 +571,10 @@ void isosnapshot::onStdoutAvailable()
 // Next button clicked
 void isosnapshot::on_buttonNext_clicked()
 {
+    QString file_name = ui->lineEditName->text();
+    if (!file_name.endsWith(".iso")) {
+        file_name += ".iso";
+    }
     // on first page
     if (ui->stackedWidget->currentIndex() == 0) {
         this->setWindowTitle(tr("Settings"));
@@ -579,8 +588,9 @@ void isosnapshot::on_buttonNext_clicked()
         ui->stackedWidget->setCurrentWidget(ui->settingsPage);
         ui->label_1->setText(tr("Snapshot will use the following settings:*"));
 
-        ui->label_2->setText(QString("\n" + tr("- Snapshot directory:") + " %1\n" +
-                       tr("- Kernel to be used:") + " %2\n").arg(snapshot_dir.absolutePath()).arg(kernel_used));
+        ui->label_2->setText("\n" + tr("- Snapshot directory:") + " " + snapshot_dir.absolutePath() + "\n" +
+                       "- " + tr("Snapshot name:") + " " + file_name + "\n" +
+                       tr("- Kernel to be used:") + " " + kernel_used + "\n");
         ui->label_3->setText(tr("*These settings can be changed by editing: ") + config_file.fileName());
 
     // on settings page
@@ -599,10 +609,9 @@ void isosnapshot::on_buttonNext_clicked()
         ui->stackedWidget->setCurrentWidget(ui->outputPage);
         this->setWindowTitle(tr("Output"));
         copyNewIso();
-        QString filename = getFilename();
         ui->outputLabel->clear();
-        mkDir(filename);
-        savePackageList(filename);
+        mkDir(file_name);
+        savePackageList(file_name);
 
         if (edit_boot_menu == "yes") {
             ans = QMessageBox::question(this, tr("Edit Boot Menu"),
@@ -610,13 +619,13 @@ void isosnapshot::on_buttonNext_clicked()
                                      QMessageBox::Yes | QMessageBox::No);
             if (ans == QMessageBox::Yes) {
                 this->hide();
-                QString cmd = gui_editor.fileName() + " " + work_dir + "/iso-template/boot/isolinux/isolinux.cfg";
+                QString cmd = gui_editor.fileName() + " \"" + work_dir + "/iso-template/boot/isolinux/isolinux.cfg\"";
                 system(cmd.toUtf8());
                 this->show();
             }
         }
         setupEnv();
-        bool success = createIso(filename);
+        bool success = createIso(file_name);
         cleanUp();
         if (success) {
             QMessageBox::information(this, tr("Success"),tr("All finished!"), QMessageBox::Ok);
@@ -629,7 +638,7 @@ void isosnapshot::on_buttonNext_clicked()
 
 void isosnapshot::on_buttonBack_clicked()
 {
-    this->setWindowTitle(tr("iso-snapshot"));
+    this->setWindowTitle(tr("Snapshot"));
     ui->stackedWidget->setCurrentIndex(0);
     ui->buttonNext->setEnabled(true);
     ui->buttonBack->setHidden(true);
@@ -732,34 +741,61 @@ void isosnapshot::on_buttonAbout_clicked()
     this->hide();
     QMessageBox msgBox(QMessageBox::NoIcon,
                        tr("About iso-snapshot"), "<p align=\"center\"><b><h2>" +
-                       tr("iso-snapshot") + "</h2></b></p><p align=\"center\">" + tr("Version: ") +
+                       tr("Snapshot") + "</h2></b></p><p align=\"center\">" + tr("Version: ") +
                        version + "</p><p align=\"center\"><h3>" +
                        tr("Program for creating a live-CD from the running system for antiX Linux") + "</h3></p><p align=\"center\"><a href=\"http://antix.mepis.org/index.php?title=Main_Page\">http://antix.mepis.org/index.php?title=Main_Page</a><br /></p><p align=\"center\">" +
                        tr("Copyright (c) antiX Linux") + "<br /><br /></p>", 0, this);
-    msgBox.addButton(tr("Cancel"), QMessageBox::AcceptRole); // because we want to display the buttons in reverse order we use counter-intuitive roles.
-    msgBox.addButton(tr("License"), QMessageBox::RejectRole);
+    msgBox.addButton(tr("License"), QMessageBox::AcceptRole);
+    msgBox.addButton(tr("Cancel"), QMessageBox::RejectRole);
     if (msgBox.exec() == QMessageBox::RejectRole)
-        system("dillo http://www.mepiscommunity.org/doc_mx/mx-snapshot-license.html");
+        system("mx-viewer file:///usr/share/doc/mx-snapshot/license.html '" + tr("MX Snapshot License").toUtf8() + "'");
     this->show();
 }
 
 // Help button clicked
 void isosnapshot::on_buttonHelp_clicked()
 {
-    system("dillo http://mepiscommunity.org/doc_mx/snapshot.html");
+    this->hide();
+    system("mx-viewer https://mxlinux.org/wiki/help-files/help-mx-save-system-iso-snapshot '" + tr("MX Snapshot Help").toUtf8() + "'");
+    this->show();
 }
 
 // Select snapshot directory
 void isosnapshot::on_buttonSelectSnapshot_clicked()
 {
     QFileDialog dialog;
-    this->hide();
-    QDir selected = dialog.getExistingDirectory(this, tr("Select Snapshot Directory"), QString(), QFileDialog::ShowDirsOnly);
-    if (selected.exists()) {
-        snapshot_dir.setPath(selected.absolutePath() + "/snapshot");
-        ui->labelSnapshot->setText(tr("The snapshot will be placed in ") + snapshot_dir.absolutePath());
+
+    QString selected = dialog.getExistingDirectory(this, tr("Select Snapshot Directory"), QString(), QFileDialog::ShowDirsOnly);
+    if (selected != "") {
+        snapshot_dir.setPath(selected + "/snapshot");
+        ui->labelSnapshotDir->setText(snapshot_dir.absolutePath());
         listFreeSpace();
     }
-    this->show();
 }
 
+// process keystrokes
+void isosnapshot::keyPressEvent(QKeyEvent *event) {
+    if (event->key() == Qt::Key_Escape) {
+        closeApp();
+    }
+}
+
+// close application
+void isosnapshot::closeApp() {
+    // ask for confirmation when on outputPage and not done
+    if (ui->stackedWidget->currentWidget() == ui->outputPage && ui->outputLabel->text() != tr("Done")) {
+        int ans = QMessageBox::question(this, tr("Confirmation"), tr("Are you sure you want to quit the application?"),
+                                        QMessageBox::Yes | QMessageBox::No);
+        if (ans == QMessageBox::Yes) {
+            return qApp->quit();
+        }
+    } else {
+        return qApp->quit();
+    }
+
+}
+
+void isosnapshot::on_buttonCancel_clicked()
+{
+    closeApp();
+}

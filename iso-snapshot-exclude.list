@@ -3,17 +3,23 @@
 
 # Do NOT edit this entry block unless you know what you are doing
 .bind-root
+.config
+.fehbg
+lost+found
+swapfile
+tmp
 dev/*
 cdrom/*
+grub/*
+live/*
 media/*
-swapfile
 mnt/*
 sys/*
 proc/*
-tmp
-live/*
+run/*
 boot/grub/*
 etc/adjtime
+etc/bcm-ckd
 etc/blkid.tab.old
 etc/defaultdomain
 etc/fstab.backup
@@ -26,21 +32,22 @@ etc/udev/rules.d/70-persistent-cd.rules
 etc/udev/rules.d/70-persistent-net.rules
 etc/resolv.conf
 home/snapshot
-lost+found
-grub/*
-run/*
 root/.bash_history
 root/.config/Trolltech.conf
 root/.dbus
 root/.gconf
 root/.gnome2
-#var/tmp/*
+root/.local/share/Trash
 var/cache/apt/archives/*.deb
+var/cache/apt-xapian-index/index.*
+var/cache/apt-show-versions/*
 var/cache/apt/*.bin
-var/lib/apt/lists/*
-var/lib/dhcp/*
+var/cache/apt/apt-file/*
 var/cache/debconf/*-old
 var/cache/lightdm
+var/cache/samba/browse.dat
+var/lib/apt/lists/*
+var/lib/dhcp/*
 var/lib/dpkg/*-old
 var/lib/lightdm/.cache
 var/lib/lightdm/.Xauthority
@@ -48,15 +55,18 @@ var/lib/nfs/rpc_pipefs/*
 var/lib/sudo/*
 var/lib/udisks/*
 var/lib/urandom/*
-var/log/!(samba)
+var/log/!(samba|clamav)
+var/log/clamav/*
 var/log/samba/*
 var/mail/*
 var/spool/mail/*
+var/tmp/*
 
 # Entries below this can be edited by the user. If you have any large
 # files or directories, you should exclude them from being copied
 # by adding them to this list.
 
+home/*/.cache/mozilla/firefox/*/cache2/*
 home/*/.mozilla/firefox/*/Cache/*
 home/*/.mozilla/seamonkey/*/Cache/*
 home/*/.adobe
@@ -89,6 +99,8 @@ home/*/VirtualBox VMs
 # the next line. You will lose custom desktop configs if you do.
 # home/*/.[a-z,A-Z,0-9]*
 
-# This stops any nvidia drivers from loading - safe option.
+# This stops any video drivers from loading - safe option.
 etc/X11/xorg.conf
 etc/X11/xorg.conf.d/20-nvidia.conf
+etc/X11/xorg.conf.d/20-intel.conf 
+etc/X11/xorg.conf.d/20-radeon.conf

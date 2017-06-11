@@ -11,6 +11,6 @@ Vcs-Git: git://github.com/anticapitalista/iso-snapshot
 
 Package: iso-snapshot-antix
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}, genisoimage, squashfs-tools, syslinux-utils, remaster-antix, iso-template-antix
+Depends: genisoimage, squashfs-tools, syslinux-utils, remaster-antix, iso-template-antix
 Description: iso-snapshot
  iso-snapshot is a tool used for creating a live-CD from the running system.

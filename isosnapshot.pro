@@ -42,6 +42,7 @@ HEADERS  += isosnapshot.h
 FORMS    += isosnapshot.ui
 
 TRANSLATIONS += translations/isosnapshot_ca.ts \
+		translations/isosnapshot_cs.ts \
                 translations/isosnapshot_de.ts \
                 translations/isosnapshot_el.ts \
                 translations/isosnapshot_es.ts \
@@ -50,7 +51,9 @@ TRANSLATIONS += translations/isosnapshot_ca.ts \
                 translations/isosnapshot_ja.ts \
                 translations/isosnapshot_nl.ts \
                 translations/isosnapshot_pl.ts \
+                translations/isosnapshot_pt.ts \
                 translations/isosnapshot_ru.ts \
-                translations/isosnapshot_sv.ts
+                translations/isosnapshot_sv.ts 
+
 
 

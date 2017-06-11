@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'isosnapshot.ui'
 **
-** Created by: Qt User Interface Compiler version 5.3.2
+** Created by: Qt User Interface Compiler version 5.7.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -19,6 +19,7 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
@@ -37,17 +38,20 @@ public:
     QStackedWidget *stackedWidget;
     QWidget *selectionPage;
     QGridLayout *gridLayout_2;
+    QLabel *labelLocation;
     QLabel *labelIntro;
     QLabel *labelCurrentSpace;
-    QSpacerItem *verticalSpacer;
     QLabel *labelDiskSpaceHelp;
     QFrame *line_4;
-    QPushButton *buttonSelectSnapshot;
-    QLabel *labelSnapshot;
     QFrame *frame_2;
     QVBoxLayout *verticalLayout_4;
     QLabel *labelUsedSpace;
     QLabel *labelFreeSpace;
+    QLabel *labelIsoName;
+    QPushButton *buttonSelectSnapshot;
+    QLabel *labelSnapshotDir;
+    QSpacerItem *verticalSpacer;
+    QLineEdit *lineEditName;
     QWidget *settingsPage;
     QVBoxLayout *verticalLayout_3;
     QLabel *label_1;
@@ -105,6 +109,11 @@ public:
         selectionPage->setObjectName(QStringLiteral("selectionPage"));
         gridLayout_2 = new QGridLayout(selectionPage);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        labelLocation = new QLabel(selectionPage);
+        labelLocation->setObjectName(QStringLiteral("labelLocation"));
+
+        gridLayout_2->addWidget(labelLocation, 10, 0, 1, 1);
+
         labelIntro = new QLabel(selectionPage);
         labelIntro->setObjectName(QStringLiteral("labelIntro"));
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
@@ -114,41 +123,26 @@ public:
         labelIntro->setSizePolicy(sizePolicy);
         labelIntro->setWordWrap(true);
 
-        gridLayout_2->addWidget(labelIntro, 0, 0, 1, 3);
+        gridLayout_2->addWidget(labelIntro, 0, 0, 1, 6);
 
         labelCurrentSpace = new QLabel(selectionPage);
         labelCurrentSpace->setObjectName(QStringLiteral("labelCurrentSpace"));
         labelCurrentSpace->setWordWrap(true);
 
-        gridLayout_2->addWidget(labelCurrentSpace, 1, 0, 1, 3);
-
-        verticalSpacer = new QSpacerItem(20, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_2->addItem(verticalSpacer, 13, 1, 1, 1);
+        gridLayout_2->addWidget(labelCurrentSpace, 1, 0, 1, 6);
 
         labelDiskSpaceHelp = new QLabel(selectionPage);
         labelDiskSpaceHelp->setObjectName(QStringLiteral("labelDiskSpaceHelp"));
         labelDiskSpaceHelp->setWordWrap(true);
 
-        gridLayout_2->addWidget(labelDiskSpaceHelp, 5, 0, 1, 3);
+        gridLayout_2->addWidget(labelDiskSpaceHelp, 5, 0, 1, 6);
 
         line_4 = new QFrame(selectionPage);
         line_4->setObjectName(QStringLiteral("line_4"));
         line_4->setFrameShape(QFrame::HLine);
         line_4->setFrameShadow(QFrame::Sunken);
 
-        gridLayout_2->addWidget(line_4, 7, 0, 1, 3);
-
-        buttonSelectSnapshot = new QPushButton(selectionPage);
-        buttonSelectSnapshot->setObjectName(QStringLiteral("buttonSelectSnapshot"));
-
-        gridLayout_2->addWidget(buttonSelectSnapshot, 10, 2, 1, 1);
-
-        labelSnapshot = new QLabel(selectionPage);
-        labelSnapshot->setObjectName(QStringLiteral("labelSnapshot"));
-        labelSnapshot->setWordWrap(true);
-
-        gridLayout_2->addWidget(labelSnapshot, 10, 0, 1, 2);
+        gridLayout_2->addWidget(line_4, 7, 0, 1, 6);
 
         frame_2 = new QFrame(selectionPage);
         frame_2->setObjectName(QStringLiteral("frame_2"));
@@ -184,7 +178,36 @@ public:
         verticalLayout_4->addWidget(labelFreeSpace);
 
 
-        gridLayout_2->addWidget(frame_2, 2, 0, 1, 3);
+        gridLayout_2->addWidget(frame_2, 2, 0, 1, 6);
+
+        labelIsoName = new QLabel(selectionPage);
+        labelIsoName->setObjectName(QStringLiteral("labelIsoName"));
+
+        gridLayout_2->addWidget(labelIsoName, 13, 0, 1, 1);
+
+        buttonSelectSnapshot = new QPushButton(selectionPage);
+        buttonSelectSnapshot->setObjectName(QStringLiteral("buttonSelectSnapshot"));
+
+        gridLayout_2->addWidget(buttonSelectSnapshot, 11, 3, 1, 1);
+
+        labelSnapshotDir = new QLabel(selectionPage);
+        labelSnapshotDir->setObjectName(QStringLiteral("labelSnapshotDir"));
+        labelSnapshotDir->setStyleSheet(QLatin1String("background-color: rgb(255, 255, 205);\n"
+"border-color: rgb(0, 0, 0);\n"
+"color: rgb(0, 0, 0);"));
+        labelSnapshotDir->setFrameShape(QFrame::Box);
+        labelSnapshotDir->setWordWrap(true);
+
+        gridLayout_2->addWidget(labelSnapshotDir, 11, 0, 1, 3);
+
+        verticalSpacer = new QSpacerItem(20, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_2->addItem(verticalSpacer, 16, 0, 1, 6);
+
+        lineEditName = new QLineEdit(selectionPage);
+        lineEditName->setObjectName(QStringLiteral("lineEditName"));
+
+        gridLayout_2->addWidget(lineEditName, 14, 0, 1, 3);
 
         stackedWidget->addWidget(selectionPage);
         settingsPage = new QWidget();
@@ -429,7 +452,6 @@ public:
         sizePolicy2.setHeightForWidth(buttonNext->sizePolicy().hasHeightForWidth());
         buttonNext->setSizePolicy(sizePolicy2);
         buttonNext->setAutoDefault(true);
-        buttonNext->setDefault(true);
 
         buttonBar->addWidget(buttonNext, 0, 8, 1, 1);
 
@@ -451,9 +473,9 @@ public:
         QObject::connect(excludeAll, SIGNAL(clicked(bool)), excludeMusic, SLOT(setChecked(bool)));
         QObject::connect(excludeAll, SIGNAL(clicked(bool)), excludePictures, SLOT(setChecked(bool)));
         QObject::connect(excludeAll, SIGNAL(clicked(bool)), excludeVideos, SLOT(setChecked(bool)));
-        QObject::connect(buttonCancel, SIGNAL(clicked()), iso_snapshot, SLOT(close()));
 
         stackedWidget->setCurrentIndex(2);
+        buttonNext->setDefault(true);
 
 
         QMetaObject::connectSlotsByName(iso_snapshot);
@@ -461,56 +483,55 @@ public:
 
     void retranslateUi(QDialog *iso_snapshot)
     {
-        iso_snapshot->setWindowTitle(QApplication::translate("isosnapshot", "isosnapshot", 0));
-        labelIntro->setText(QApplication::translate("isosnapshot", "<html><head/><body><p>Snapshot is a utility that creates a bootable image (ISO) of your working system that you can use for storage or distribution. You can continue working with undemanding applications while it is running.<br/></p></body></html>", 0));
-        labelCurrentSpace->setText(QApplication::translate("isosnapshot", "Used space on / (root) and /home partitions:", 0));
+        iso_snapshot->setWindowTitle(QApplication::translate("isosnapshot", "Snapshot", Q_NULLPTR));
+        labelLocation->setText(QApplication::translate("isosnapshot", "Snapshot location:", Q_NULLPTR));
+        labelIntro->setText(QApplication::translate("isosnapshot", "<html><head/><body><p>Snapshot is a utility that creates a bootable image (ISO) of your working system that you can use for storage or distribution. You can continue working with undemanding applications while it is running.<br/></p></body></html>", Q_NULLPTR));
+        labelCurrentSpace->setText(QApplication::translate("isosnapshot", "Used space on / (root) and /home partitions:", Q_NULLPTR));
         labelDiskSpaceHelp->setText(QString());
-        buttonSelectSnapshot->setText(QApplication::translate("isosnapshot", "Select a different snapshot directory", 0));
-        labelSnapshot->setText(QString());
         labelUsedSpace->setText(QString());
         labelFreeSpace->setText(QString());
-        label_1->setText(QApplication::translate("isosnapshot", "TextLabel", 0));
-        label_2->setText(QApplication::translate("isosnapshot", "TextLabel", 0));
-        label_3->setText(QApplication::translate("isosnapshot", "TextLabel", 0));
-        buttonEditConfig->setText(QApplication::translate("isosnapshot", "Edit Configuration File", 0));
-        labelExclude->setText(QApplication::translate("isosnapshot", "You can also exclude certain directories by ticking the common choices below, or by clicking on the button to directly edit /usr/lib/iso-snapshot/snapshot-exclude.list.", 0));
-        excludeDownloads->setText(QApplication::translate("isosnapshot", "Downloads", 0));
-        excludeDocuments->setText(QApplication::translate("isosnapshot", "Documents", 0));
-        excludeAll->setText(QApplication::translate("isosnapshot", "All of the above", 0));
-        excludePictures->setText(QApplication::translate("isosnapshot", "Pictures", 0));
-        excludeMusic->setText(QApplication::translate("isosnapshot", "Music", 0));
-        excludeDesktop->setText(QApplication::translate("isosnapshot", "Desktop", 0));
-        excludeVideos->setText(QApplication::translate("isosnapshot", "Videos", 0));
-        buttonEditExclude->setText(QApplication::translate("isosnapshot", "Edit Exclusion File", 0));
+        labelIsoName->setText(QApplication::translate("isosnapshot", "Snapshot name:", Q_NULLPTR));
+        buttonSelectSnapshot->setText(QApplication::translate("isosnapshot", "Select a different snapshot directory", Q_NULLPTR));
+        labelSnapshotDir->setText(QString());
+        label_1->setText(QApplication::translate("isosnapshot", "TextLabel", Q_NULLPTR));
+        label_2->setText(QApplication::translate("isosnapshot", "TextLabel", Q_NULLPTR));
+        label_3->setText(QApplication::translate("isosnapshot", "TextLabel", Q_NULLPTR));
+        buttonEditConfig->setText(QApplication::translate("isosnapshot", "Edit Configuration File", Q_NULLPTR));
+        labelExclude->setText(QApplication::translate("isosnapshot", "You can also exclude certain directories by ticking the common choices below, or by clicking on the button to directly edit /usr/lib/iso-snapshot/snapshot-exclude.list.", Q_NULLPTR));
+        excludeDownloads->setText(QApplication::translate("isosnapshot", "Downloads", Q_NULLPTR));
+        excludeDocuments->setText(QApplication::translate("isosnapshot", "Documents", Q_NULLPTR));
+        excludeAll->setText(QApplication::translate("isosnapshot", "All of the above", Q_NULLPTR));
+        excludePictures->setText(QApplication::translate("isosnapshot", "Pictures", Q_NULLPTR));
+        excludeMusic->setText(QApplication::translate("isosnapshot", "Music", Q_NULLPTR));
+        excludeDesktop->setText(QApplication::translate("isosnapshot", "Desktop", Q_NULLPTR));
+        excludeVideos->setText(QApplication::translate("isosnapshot", "Videos", Q_NULLPTR));
+        buttonEditExclude->setText(QApplication::translate("isosnapshot", "Edit Exclusion File", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        radioRespin->setToolTip(QApplication::translate("isosnapshot", "<html><head/><body><p>This option will reset &quot;demo&quot; and &quot;root&quot; passwords to the antiX Linux defaults and will not copy any personal accounts created.</p></body></html>", 0));
+        radioRespin->setToolTip(QApplication::translate("isosnapshot", "<html><head/><body><p>This option will reset &quot;demo&quot; and &quot;root&quot; passwords to the antiX Linux defaults and will not copy any personal accounts created.</p></body></html>", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        radioRespin->setText(QApplication::translate("isosnapshot", "Resetting accounts (for distribution to others)", 0));
-        label->setText(QApplication::translate("isosnapshot", "Type of snapshot:", 0));
-        radioPersonal->setText(QApplication::translate("isosnapshot", "Preserving accounts (for personal backup)", 0));
+        radioRespin->setText(QApplication::translate("isosnapshot", "Resetting accounts (for distribution to others)", Q_NULLPTR));
+        label->setText(QApplication::translate("isosnapshot", "Type of snapshot:", Q_NULLPTR));
+        radioPersonal->setText(QApplication::translate("isosnapshot", "Preserving accounts (for personal backup)", Q_NULLPTR));
         outputLabel->setText(QString());
 #ifndef QT_NO_TOOLTIP
-        buttonCancel->setToolTip(QApplication::translate("isosnapshot", "Quit application", 0));
+        buttonCancel->setToolTip(QApplication::translate("isosnapshot", "Quit application", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        buttonCancel->setText(QApplication::translate("isosnapshot", "Cancel", 0));
-        buttonCancel->setShortcut(QApplication::translate("isosnapshot", "Alt+N", 0));
+        buttonCancel->setText(QApplication::translate("isosnapshot", "Cancel", Q_NULLPTR));
+        buttonCancel->setShortcut(QApplication::translate("isosnapshot", "Alt+N", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        buttonHelp->setToolTip(QApplication::translate("isosnapshot", "Display help ", 0));
+        buttonHelp->setToolTip(QApplication::translate("isosnapshot", "Display help ", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        buttonHelp->setText(QApplication::translate("isosnapshot", "Help", 0));
-        buttonHelp->setShortcut(QApplication::translate("isosnapshot", "Alt+H", 0));
+        buttonHelp->setText(QApplication::translate("isosnapshot", "Help", Q_NULLPTR));
+        buttonHelp->setShortcut(QApplication::translate("isosnapshot", "Alt+H", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        buttonAbout->setToolTip(QApplication::translate("isosnapshot", "About this application", 0));
+        buttonAbout->setToolTip(QApplication::translate("isosnapshot", "About this application", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
-        buttonAbout->setText(QApplication::translate("isosnapshot", "About...", 0));
-        buttonAbout->setShortcut(QApplication::translate("isosnapshot", "Alt+B", 0));
+        buttonAbout->setText(QApplication::translate("isosnapshot", "About...", Q_NULLPTR));
+        buttonAbout->setShortcut(QApplication::translate("isosnapshot", "Alt+B", Q_NULLPTR));
         labelMX->setText(QString());
-#ifndef QT_NO_TOOLTIP
-        buttonNext->setToolTip(QApplication::translate("isosnapshot", "Start scanning for shares", 0));
-#endif // QT_NO_TOOLTIP
-        buttonNext->setText(QApplication::translate("isosnapshot", "Next >", 0));
+        buttonNext->setText(QApplication::translate("isosnapshot", "Next >", Q_NULLPTR));
         buttonNext->setShortcut(QString());
-        buttonBack->setText(QApplication::translate("isosnapshot", "< Back", 0));
+        buttonBack->setText(QApplication::translate("isosnapshot", "< Back", Q_NULLPTR));
     } // retranslateUi
 
 };
