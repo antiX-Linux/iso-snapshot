@@ -1,3 +1,16 @@
+iso-snapshot-antix (0.2.0) unstable; urgency=medium
+
+  * bump version
+  * add persist-config.conf to excludes list
+
+ -- anticapitalista <antix@operamail.com>  Fri, 13 Oct 2017 12:43:35 +0300
+
+iso-snapshot-antix (0.1.12) unstable; urgency=medium
+
+  * Use capital letters in desktop file
+
+ -- anticapitalista <antix@operamail.com>  Sat, 07 Oct 2017 21:04:17 +0300
+
 iso-snapshot-antix (0.1.11) unstable; urgency=medium
 
   * New copy-initrd-modules script

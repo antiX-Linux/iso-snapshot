@@ -25,6 +25,7 @@ etc/defaultdomain
 etc/fstab.backup
 etc/ioctl.save
 etc/issue
+etc/live/persist-config.conf
 etc/live/protect
 etc/mailname
 etc/mtab
