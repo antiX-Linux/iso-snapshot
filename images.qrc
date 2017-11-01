@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/antix-globe-3.png</file>
+    </qresource>
+</RCC>

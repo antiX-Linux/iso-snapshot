@@ -100,7 +100,7 @@ public:
     {
         if (iso_snapshot->objectName().isEmpty())
             iso_snapshot->setObjectName(QStringLiteral("iso_snapshot"));
-        iso_snapshot->resize(804, 517);
+        iso_snapshot->resize(808, 517);
         verticalLayout = new QVBoxLayout(iso_snapshot);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         stackedWidget = new QStackedWidget(iso_snapshot);
@@ -411,7 +411,12 @@ public:
         sizePolicy2.setHeightForWidth(buttonCancel->sizePolicy().hasHeightForWidth());
         buttonCancel->setSizePolicy(sizePolicy2);
         QIcon icon;
-        icon.addFile(QStringLiteral("../../../../../../../../usr/share/iso-snapshot/icons/gtk-cancel.png"), QSize(), QIcon::Normal, QIcon::Off);
+        QString iconThemeName = QStringLiteral("window-close");
+        if (QIcon::hasThemeIcon(iconThemeName)) {
+            icon = QIcon::fromTheme(iconThemeName);
+        } else {
+            icon.addFile(QStringLiteral(""), QSize(), QIcon::Normal, QIcon::Off);
+        }
         buttonCancel->setIcon(icon);
         buttonCancel->setAutoDefault(true);
 
@@ -420,7 +425,12 @@ public:
         buttonHelp = new QPushButton(iso_snapshot);
         buttonHelp->setObjectName(QStringLiteral("buttonHelp"));
         QIcon icon1;
-        icon1.addFile(QStringLiteral("../../../../../../../../usr/share/iso-snapshot/icons/gnome-help.png"), QSize(), QIcon::Normal, QIcon::Off);
+        iconThemeName = QStringLiteral("help-contents");
+        if (QIcon::hasThemeIcon(iconThemeName)) {
+            icon1 = QIcon::fromTheme(iconThemeName);
+        } else {
+            icon1.addFile(QStringLiteral(""), QSize(), QIcon::Normal, QIcon::Off);
+        }
         buttonHelp->setIcon(icon1);
 
         buttonBar->addWidget(buttonHelp, 0, 1, 1, 1);
@@ -432,7 +442,12 @@ public:
         buttonAbout = new QPushButton(iso_snapshot);
         buttonAbout->setObjectName(QStringLiteral("buttonAbout"));
         QIcon icon2;
-        icon2.addFile(QStringLiteral("../../../../../../../../usr/share/iso-snapshot/icons/accessories-text-editor.png"), QSize(), QIcon::Normal, QIcon::Off);
+        iconThemeName = QStringLiteral("help-about");
+        if (QIcon::hasThemeIcon(iconThemeName)) {
+            icon2 = QIcon::fromTheme(iconThemeName);
+        } else {
+            icon2.addFile(QStringLiteral(""), QSize(), QIcon::Normal, QIcon::Off);
+        }
         buttonAbout->setIcon(icon2);
         buttonAbout->setAutoDefault(true);
 
@@ -442,7 +457,7 @@ public:
         labelMX->setObjectName(QStringLiteral("labelMX"));
         labelMX->setMaximumSize(QSize(32, 32));
         labelMX->setMidLineWidth(0);
-        labelMX->setPixmap(QPixmap(QString::fromUtf8("../../../../../../../../usr/share/iso-snapshot/icons/mxfcelogo.png")));
+        labelMX->setPixmap(QPixmap(QString::fromUtf8(":/icons/antix-globe-3.png")));
         labelMX->setScaledContents(true);
 
         buttonBar->addWidget(labelMX, 0, 3, 1, 1);
@@ -451,6 +466,8 @@ public:
         buttonNext->setObjectName(QStringLiteral("buttonNext"));
         sizePolicy2.setHeightForWidth(buttonNext->sizePolicy().hasHeightForWidth());
         buttonNext->setSizePolicy(sizePolicy2);
+        QIcon icon3(QIcon::fromTheme(QStringLiteral("go-next")));
+        buttonNext->setIcon(icon3);
         buttonNext->setAutoDefault(true);
 
         buttonBar->addWidget(buttonNext, 0, 8, 1, 1);
@@ -459,6 +476,8 @@ public:
         buttonBack->setObjectName(QStringLiteral("buttonBack"));
         sizePolicy2.setHeightForWidth(buttonBack->sizePolicy().hasHeightForWidth());
         buttonBack->setSizePolicy(sizePolicy2);
+        QIcon icon4(QIcon::fromTheme(QStringLiteral("go-previous")));
+        buttonBack->setIcon(icon4);
 
         buttonBar->addWidget(buttonBack, 0, 7, 1, 1);
 
@@ -529,9 +548,9 @@ public:
         buttonAbout->setText(QApplication::translate("isosnapshot", "About...", Q_NULLPTR));
         buttonAbout->setShortcut(QApplication::translate("isosnapshot", "Alt+B", Q_NULLPTR));
         labelMX->setText(QString());
-        buttonNext->setText(QApplication::translate("isosnapshot", "Next >", Q_NULLPTR));
+        buttonNext->setText(QApplication::translate("isosnapshot", "Next", Q_NULLPTR));
         buttonNext->setShortcut(QString());
-        buttonBack->setText(QApplication::translate("isosnapshot", "< Back", Q_NULLPTR));
+        buttonBack->setText(QApplication::translate("isosnapshot", "Back", Q_NULLPTR));
     } // retranslateUi
 
 };

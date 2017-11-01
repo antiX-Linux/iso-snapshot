@@ -1,3 +1,16 @@
+iso-snapshot-antix (0.2.2) unstable; urgency=medium
+
+  * exclude localhost only for generalized snapshot 
+
+ -- anticapitalista <antix@operamail.com>  Thu, 02 Nov 2017 00:20:44 +0200
+
+iso-snapshot-antix (0.2.1) unstable; urgency=medium
+
+  * Various cosmetic changes made upstream in mx-snapshot
+  * Lithuanian and Slovak added
+  
+ -- anticapitalista <antix@operamail.com>  Wed, 25 Oct 2017 14:37:47 +0300
+
 iso-snapshot-antix (0.2.0) unstable; urgency=medium
 
   * bump version

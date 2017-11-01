@@ -1,10 +1,10 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="el" version="2.1">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="sk" version="2.1">
 <context>
     <name>QApplication</name>
     <message>
         <location filename="main.cpp" line="52"/>
         <source>You must run this program as root.</source>
-        <translation>Πρέπει να τρέξετε αυτή την εφαρμογή ως Root.</translation>
+        <translation>Tento program musíte spustiť ako root užívateľ.</translation>
     </message>
 </context>
 <context>
@@ -19,19 +19,19 @@
         <location filename="isosnapshot.ui" line="33"/>
         <location filename="ui_isosnapshot.h" line="465"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Snapshot is a utility that creates a bootable image (ISO) of your working system that you can use for storage or distribution. You can continue working with undemanding applications while it is running.&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Snapshot είναι ένα βοηθητικό πρόγραμμα που δημιουργεί μια εικόνα εκκίνησης (ISO) του συστήματος εργασίας σας που μπορείτε να χρησιμοποιήσετε για αποθήκευση ή διανομή. Μπορείτε να συνεχίσετε να εργάζεστε με απαιτητικών εφαρμογών, ενώ βρίσκεται σε λειτουργία.&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Snapshot je aplikácia na tvorbu spustiteľných (ISO) obrazov vášho funkčného systému, ktoré môžete použiť pre zálohovanie alebo distribúciu. Počas tvorby zálohy môžete paralelne používať nemej náročné aplikácie.&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="43"/>
         <location filename="ui_isosnapshot.h" line="466"/>
         <source>Used space on / (root) and /home partitions:</source>
-        <translation>Χώρο που χρησιμοποιείται για την / (root) και /home:</translation>
+        <translation>Použitý priestor na diskoch / (root) a /home:</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="83"/>
         <location filename="ui_isosnapshot.h" line="468"/>
         <source>Select a different snapshot directory</source>
-        <translation>Επιλέξτε ένα διαφορετικό κατάλογο </translation>
+        <translation>Zvoľte inú zložku pre snapshot</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="182"/>
@@ -41,104 +41,104 @@
         <location filename="ui_isosnapshot.h" line="473"/>
         <location filename="ui_isosnapshot.h" line="474"/>
         <source>TextLabel</source>
-        <translation>TextLabel</translation>
+        <translation>Textové označenie</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="246"/>
         <location filename="ui_isosnapshot.h" line="475"/>
         <source>Edit Configuration File</source>
-        <translation>Ρυθμίσεις ώς Root</translation>
+        <translation>Upraviť konfiguračný súbor</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="276"/>
         <location filename="ui_isosnapshot.h" line="476"/>
         <source>You can also exclude certain directories by ticking the common choices below, or by clicking on the button to directly edit /usr/lib/iso-snapshot/snapshot-exclude.list.</source>
-        <translation>Μπορείτε επίσης να εξαιρεθούν ορισμένες καταλόγους τσεκάροντας τις κοινές επιλογές παρακάτω, ή κάνοντας κλικ στο κουμπί για να επεξεργαστείτε άμεσα /usr/lib/iso-snapshot/snapshot-exclude.list</translation>
+        <translation>Vybraním položiek nižšie môžete zo zálohy vynechať určité zložky alebo kliknutím na tlačidlo priamo upraviť ich zoznam definovaný v súbore /usr/lib/iso-snapshot/snapshot-exclude.list.</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="301"/>
         <location filename="ui_isosnapshot.h" line="477"/>
         <source>Downloads</source>
-        <translation>Λήψεις</translation>
+        <translation>Stiahnuté</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="308"/>
         <location filename="ui_isosnapshot.h" line="478"/>
         <source>Documents</source>
-        <translation>&apos;Εγγραφα</translation>
+        <translation>Dokumenty</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="315"/>
         <location filename="ui_isosnapshot.h" line="479"/>
         <source>All of the above</source>
-        <translation>Ολα τα παραπανω</translation>
+        <translation>Všetko uvedené vyššie</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="322"/>
         <location filename="ui_isosnapshot.h" line="480"/>
         <source>Pictures</source>
-        <translation>Εικόνες</translation>
+        <translation>Obrázky</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="329"/>
         <location filename="ui_isosnapshot.h" line="481"/>
         <source>Music</source>
-        <translation>Μουσική</translation>
+        <translation>Hudba</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="336"/>
         <location filename="ui_isosnapshot.h" line="482"/>
         <source>Desktop</source>
-        <translation>Επιφάνεια εργασίας</translation>
+        <translation>Pracovná plocha</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="343"/>
         <location filename="ui_isosnapshot.h" line="483"/>
         <source>Videos</source>
-        <translation>βίντεο</translation>
+        <translation>Videá</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="359"/>
         <location filename="ui_isosnapshot.h" line="484"/>
         <source>Edit Exclusion File</source>
-        <translation>Επεξεργασία αρχείων Exclude</translation>
+        <translation>Upraviť zoznam vynechaných</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="385"/>
         <location filename="ui_isosnapshot.h" line="486"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This option will reset &amp;quot;demo&amp;quot; and &amp;quot;root&amp;quot; passwords to the antiX Linux defaults and will not copy any personal accounts created.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;Η επιλογή αυτή θα επαναφέρει τα passwords &quot;demo&quot; και &quot;root&quot; στις προεπιλογές του antiX Linux και δεν θα αντιγράψει τις προσωπικές τους λογαριασμούς που δημιουργούνται.</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Táto voľba zresetuje heslá pre &amp;quot;demo&amp;quot; a &amp;quot;root&amp;quot; na antiX Linux predvolené a neprenesie žiadne uživateľom vytvorené kontá.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="388"/>
         <location filename="ui_isosnapshot.h" line="488"/>
         <source>Resetting accounts (for distribution to others)</source>
-        <translation>Επαναφορά λογαριασμούς (για διανομή στους άλλους)</translation>
+        <translation>Resetovať kontá (distribúcia iným)</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="395"/>
         <location filename="ui_isosnapshot.h" line="489"/>
         <source>Type of snapshot:</source>
-        <translation>Τύπος snapshot:</translation>
+        <translation>Typ obrazu:</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="402"/>
         <location filename="ui_isosnapshot.h" line="490"/>
         <source>Preserving accounts (for personal backup)</source>
-        <translation>Διατήρηση λογαριασμών (για προσωπική δημιουργία αντιγράφων ασφαλείας)</translation>
+        <translation>Zachovať kontá (pre vlastné zazálohovanie)</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="514"/>
         <location filename="ui_isosnapshot.h" line="493"/>
         <source>Quit application</source>
-        <translation>Κλείστε την εφαρμογή </translation>
+        <translation>Zatvoriť aplikáciu</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="517"/>
         <location filename="isosnapshot.cpp" line="739"/>
         <location filename="ui_isosnapshot.h" line="495"/>
         <source>Cancel</source>
-        <translation>Ακύρωση</translation>
+        <translation>Zrušiť</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="524"/>
@@ -150,31 +150,31 @@
         <location filename="isosnapshot.ui" line="534"/>
         <location filename="ui_isosnapshot.h" line="498"/>
         <source>Display help </source>
-        <translation>Δείτε Βοήθεια</translation>
+        <translation>Zobraziť nápovedu</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="537"/>
         <location filename="ui_isosnapshot.h" line="500"/>
         <source>Help</source>
-        <translation>Βοήθεια </translation>
+        <translation>Pomoc</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="544"/>
         <location filename="ui_isosnapshot.h" line="501"/>
         <source>Alt+H</source>
-        <translation>Alt+H </translation>
+        <translation>Alt+H</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="567"/>
         <location filename="ui_isosnapshot.h" line="503"/>
         <source>About this application</source>
-        <translation>Περί εφαρμογής.</translation>
+        <translation>O tejto aplikácii</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="570"/>
         <location filename="ui_isosnapshot.h" line="505"/>
         <source>About...</source>
-        <translation>Περί</translation>
+        <translation>O Programe</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="577"/>
@@ -186,19 +186,19 @@
         <location filename="isosnapshot.ui" line="615"/>
         <location filename="ui_isosnapshot.h" line="509"/>
         <source>Start scanning for shares</source>
-        <translation>Ξεκινήστε τη σάρωση για τις μετοχές </translation>
+        <translation>Začať s hľadaním zdieľaní v sieti</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="618"/>
         <location filename="ui_isosnapshot.h" line="511"/>
         <source>Next &gt;</source>
-        <translation>Επόμενο &gt;</translation>
+        <translation>Ďalej &gt;</translation>
     </message>
     <message>
         <location filename="isosnapshot.ui" line="640"/>
         <location filename="ui_isosnapshot.h" line="513"/>
         <source>&lt; Back</source>
-        <translation>&lt; Πίσω </translation>
+        <translation>&lt;Naspäť</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="46"/>
@@ -211,22 +211,22 @@
     <message>
         <location filename="isosnapshot.cpp" line="72"/>
         <source>The snapshot will be placed by default in </source>
-        <translation>Το snapshot θα τοποθετηθεί από προεπιλογή σε</translation>
+        <translation>Obraz bude predvolene uloženy do</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="193"/>
         <source>Used space on / (root): </source>
-        <translation>Χώρο που χρησιμοποιείται για την / (root):</translation>
+        <translation>Použitý priestor na disku / (root):</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="196"/>
         <source>Used space on /home: </source>
-        <translation>Χώρο που χρησιμοποιείται για την /</translation>
+        <translation>Použitý priestor na disku /home:</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="213"/>
         <source>Free space on %1, where snapshot folder is placed: </source>
-        <translation>Ελεύθερος χώρος στο %1, όπου το φάκελο σnapshot τοποθετείται:</translation>
+        <translation>Voľné miesto na disku %1, na ktorom je obraz umiestnený: </translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="215"/>
@@ -236,178 +236,178 @@
       by removing previous snapshots and saved copies:
       %1 snapshots are taking up %2 of disk space.
 </source>
-        <translation>Ο ελεύθερος χώρος πρέπει να είναι επαρκής για να κρατήσει τα συμπιεσμένα δεδομένα από / και /home
+        <translation>Voľné miesto musí byť dostatočné pre umiestnenie komprimovaných dát z diskov / a /home
 
-Εάν είναι απαραίτητο, μπορείτε να δημιουργήσετε περισσότερα διαθέσιμα space
-αφαιρώντας τα προηγούμενα στιγμιότυπα και αποθηκεύονται αντίγραφα:
-%1 snapshots καταλαμβάνουν %2 του χώρου στο δίσκο</translation>
+Ak to bude nutné, môžete uvoľnit miesto
+odstránením predošlých obrazov alebo kópií systému:
+%1 obrazy zaberajú %2 diskového priestoru.
+</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="227"/>
         <source>The graphical text editor is set to %1, but it is not installed. Edit %2 and set the gui_editor variable to the editor of your choice. (examples: /usr/bin/gedit, /usr/bin/leafpad)
 
 Will install leafpad and use it this time.</source>
-        <translation>Το γραφικό επεξεργαστή κειμένου έχει οριστεί σε %1, αλλά δεν έχει εγκατασταθεί. Κάντε επεξεργασία %2 και ρυθμίστε την μεταβλητή gui_editor στο συντάκτη της επιλογής σας. (Παραδείγματα: /usr/bin/gedit, /usr/bin/leafpad)
- 
-Θα εγκαταστήσει το leafpad και να το χρησιμοποιήσετε αυτή τη φορά.</translation>
+        <translation>Textový editor je nastavený na %1, ale nie je nainštalovaný. Upravte %2 a nastavte premennú gui_editor na Vami zvolenú hodnotu. (príklady: /usr/bin/gedit, /usr/bin/leafpad)
+
+Pre tento krát sa nainštaluje a použije Leafpad.</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="251"/>
         <source>Installing </source>
-        <translation>Εγκατάσταση </translation>
+        <translation>Inštalácia</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="266"/>
         <location filename="isosnapshot.cpp" line="422"/>
         <location filename="isosnapshot.cpp" line="436"/>
         <source>Error</source>
-        <translation>Σφάλμα</translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="266"/>
         <source>Could not install </source>
-        <translation>Δεν ήταν δυνατή η εγκατάσταση</translation>
+        <translation>Nepodarilo sa nainštalovať</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="315"/>
         <source>Copying the new-iso filesystem...</source>
-        <translation>Αντιγράφοντας το filesystem new-iso...</translation>
+        <translation>Kopíruje sa nový ISO systém súborov....</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="420"/>
         <source>Squashing filesystem...</source>
-        <translation>Συμπίεση αρχείων ...</translation>
+        <translation>Tvorba systému súborov...</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="422"/>
         <source>Could not create linuxfs file, please check whether you have enough space on the destination partition.</source>
-        <translation>Δεν ήταν δυνατή η δημιουργία του αρχείου linuxfs, ελέγξτε αν έχετε αρκετό χώρο στο προορισμενο διαμέρισμα.</translation>
+        <translation>Nepodarilo sa vytvoriť súbor linuxfs, prosím skontrolujte, či máte v cieľom umiestnení dostatok voľného miesta </translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="434"/>
         <source>Creating CD/DVD image file...</source>
-        <translation>Δημιουργία CD/DVD αρχείο εικόνας ...</translation>
+        <translation>Vytváranie CD/DVD obrazu...</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="436"/>
         <source>Could not create ISO file, please check whether you have enough space on the destination partition.</source>
-        <translation>Δεν ήταν δυνατή η δημιουργία του αρχείου ISO, ελέγξτε αν έχετε αρκετό χώρο στο προορισμενο διαμέρισμα.</translation>
+        <translation>Nepodarilo sa vytvoriť ISO súbor, prosím skontrolujte, či máte v cieľom umiestnení dostatok voľného miesta.</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="442"/>
         <source>Making hybrid iso</source>
-        <translation>Κάνοντας υβριδικο ISO</translation>
+        <translation>Tvorba hybridného ISO</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="460"/>
         <source>Making md5sum</source>
-        <translation>Κάνοντας md5sum</translation>
+        <translation>Tvorba kontrolného súboru md5sum</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="471"/>
         <source>Cleaning...</source>
-        <translation>Γίνεται εκκαθάριση</translation>
+        <translation>Čistenie...</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="522"/>
         <source>Please wait.</source>
-        <translation>Παρακαλώ περιμένετε.</translation>
+        <translation>Čakajte prosím...</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="524"/>
         <source>Please wait. Calculating used disk space...</source>
-        <translation>Παρακαλώ περιμένετε. Υπολογισμός χώρο που χρησιμοποιείται στο δίσκο ...</translation>
+        <translation>Čakajte prosím, vypočítava sa použité miesto na disku...</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="571"/>
         <source>Settings</source>
-        <translation>Ρυθμίσεις</translation>
+        <translation>Nastavenia</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="580"/>
         <source>Snapshot will use the following settings:*</source>
-        <translation>Snapshot θα χρησιμοποιήσει τις παρακάτω ρυθμίσεις:*</translation>
+        <translation>Použijú sa nasledujúce nastavenia:*</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="582"/>
         <source>- Snapshot directory:</source>
-        <translation>- Κατάλογο Snapshot</translation>
+        <translation>- Zložka pre umiestnenie obrazu:</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="583"/>
         <source>- Kernel to be used:</source>
-        <translation>- Πυρήνα που θα χρησιμοποιηθεί:</translation>
+        <translation>- Linuxové jadro:</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="584"/>
         <source>*These settings can be changed by editing: </source>
-        <translation>* Οι ρυθμίσεις αυτές μπορούν να τροποποιηθούν από την επεξεργασία:</translation>
+        <translation>*Tieto nastavenia sa dajú zmeniť editáciou: </translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="589"/>
         <source>Final chance</source>
-        <translation>Τελευταία ευκαιρία</translation>
+        <translation>Posledná šanca</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="590"/>
         <source>Snapshot now has all the information it needs to create an ISO from your running system.</source>
-        <translation>Snapshot έχει όλες τις πληροφορίες που χρειάζεται για να δημιουργήσει ένα ISO από λειτουργία του συστήματός σας.</translation>
+        <translation>Snapshot má všetky potrebné informácie k vytvoreniu súboru ISO z vášho funkčného systému.</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="591"/>
         <source>It will take some time to finish, depending on the size of the installed system and the capacity of your computer.</source>
-        <translation>Θα πάρει κάποιο χρόνο για να ολοκληρωθεί, ανάλογα με το μέγεθος του εγκατεστημένου συστήματος και την ικανότητα του υπολογιστή σας.</translation>
+        <translation>Tvorba obrazu zaberie nejaký čas, v závislosti na veľkosti nainštalovaného systému a výkone vášho PC. </translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="592"/>
         <source>OK to start?</source>
-        <translation>OK για να ξεκινήσετε;</translation>
+        <translation>Chcete začať?</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="600"/>
         <source>Output</source>
-        <translation>Έξοδος</translation>
+        <translation>Výstup</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="608"/>
         <source>Edit Boot Menu</source>
-        <translation>Επεξεργασία μενού εκκίνησης</translation>
+        <translation>Upraviť štartovnú ponuku</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="609"/>
         <source>The program will now pause to allow you to edit any files in the work directory. Select Yes to edit the boot menu or select No to bypass this step and continue creating the snapshot.</source>
-        <translation>Το πρόγραμμα τώρα θα σταματήσει να σας επιτρέψει να επεξεργαστείτε τα αρχεία στον κατάλογο εργασίας. Επιλέξτε Ναι για να επεξεργαστείτε το μενού εκκίνησης ή επιλέξτε Όχι για να παρακάμψετε αυτό το βήμα και να συνεχίσετε τη δημιουργία του snapshot.</translation>
+        <translation>Program sa pozastaví aby Vám umožnil upraviť súbory v pracovnej zložke. Zvoľte Ano pre editáciu štartovnej ponuky alebo Nie ak si prajete preskočiť tento krok a pokračovať v tvorbe obrazu.</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="622"/>
         <source>Success</source>
-        <translation>Επιτυχία!</translation>
+        <translation>Úspech</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="622"/>
         <source>All finished!</source>
-        <translation>Ολοκλήρωση</translation>
+        <translation>Hotovo!</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="623"/>
         <source>Close</source>
-        <translation>Κλείσιμο</translation>
+        <translation>Zatvoriť</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="734"/>
         <source>About iso-snapshot</source>
-        <translation>Περί iso-snapshot
-</translation>
+        <translation>O programe iso-snapshot</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="735"/>
         <source>Version: </source>
-        <translation>Έκδοση:</translation>
+        <translation>Verzia:</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="737"/>
         <source>Program for creating a live-CD from the running system for antiX Linux</source>
-        <translation>Πρόγραμμα για τη δημιουργία ενός live-CD από το σύστημα λειτουργίας για το antiX Linux</translation>
+        <translation>Program pre tvorbu Live-CD z funkčného operačného systému antiX Linux</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="738"/>
@@ -417,17 +417,17 @@ Will install leafpad and use it this time.</source>
     <message>
         <location filename="isosnapshot.cpp" line="740"/>
         <source>License</source>
-        <translation>Άδεια</translation>
+        <translation>Licencia</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="757"/>
         <source>Select Snapshot Directory</source>
-        <translation>Επιλέξτε Κατάλογος Snpshot</translation>
+        <translation>Zvoľte zložku pre snapshot</translation>
     </message>
     <message>
         <location filename="isosnapshot.cpp" line="760"/>
         <source>The snapshot will be placed in </source>
-        <translation>Το snapshot θα τοποθετηθε </translation>
+        <translation>Obraz bude uloženy do</translation>
     </message>
 </context>
 </TS>

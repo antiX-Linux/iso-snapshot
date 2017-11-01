@@ -419,6 +419,13 @@ bool isosnapshot::createIso(QString filename)
     // add exclusions snapshot dir
     addRemoveExclusion(true, snapshot_dir.absolutePath());
 
+    if (reset_accounts) {
+        // exclude /etc/localtime if link and timezone not America/New_York
+        if (system("test -L /etc/localtime") == 0 && getCmdOut("cat /etc/timezone") != "America/New_York" ) {
+            addRemoveExclusion(true, "/etc/localtime");
+        }
+    }
+
     // squash the filesystem copy
     QDir::setCurrent(work_dir);
     cmd = "mksquashfs /.bind-root iso-template/antiX/linuxfs " + mksq_opt + " -wildcards -ef " + snapshot_excludes.fileName() + " " + session_excludes;
@@ -492,7 +499,9 @@ void isosnapshot::cleanUp()
 // adds or removes exclusion to the exclusion string
 void isosnapshot::addRemoveExclusion(bool add, QString exclusion)
 {
-    exclusion.remove(0, 1); // remove training slash
+    if (exclusion.startsWith("/")) {
+        exclusion.remove(0, 1); // remove training slash
+    }
     if (add) {
         if ( session_excludes == "" ) {
             session_excludes.append("-e '" + exclusion + "'");
@@ -746,9 +755,10 @@ void isosnapshot::on_buttonAbout_clicked()
                        tr("Program for creating a live-CD from the running system for antiX Linux") + "</h3></p><p align=\"center\"><a href=\"http://antix.mepis.org/index.php?title=Main_Page\">http://antix.mepis.org/index.php?title=Main_Page</a><br /></p><p align=\"center\">" +
                        tr("Copyright (c) antiX Linux") + "<br /><br /></p>", 0, this);
     msgBox.addButton(tr("License"), QMessageBox::AcceptRole);
-    msgBox.addButton(tr("Cancel"), QMessageBox::RejectRole);
-    if (msgBox.exec() == QMessageBox::RejectRole)
+    msgBox.addButton(tr("Cancel"), QMessageBox::NoRole);
+    if (msgBox.exec() == QMessageBox::AcceptRole) {
         system("mx-viewer file:///usr/share/doc/mx-snapshot/license.html '" + tr("MX Snapshot License").toUtf8() + "'");
+    }
     this->show();
 }
 

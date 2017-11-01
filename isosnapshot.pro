@@ -2,7 +2,7 @@
 # * Copyright (C) 2015 MX Authors
 # *
 # * Authors: Adrian
-# *          MX & MEPIS Community <http://forum.mepiscommunity.org>
+# *          MX Linux <http://mxlinux.org>
 # *
 # * This file is part of MX Snapshot.
 # *
@@ -49,11 +49,14 @@ TRANSLATIONS += translations/isosnapshot_ca.ts \
                 translations/isosnapshot_fr.ts \
                 translations/isosnapshot_it.ts \
                 translations/isosnapshot_ja.ts \
+                translations/isosnapshot_lt.ts \
                 translations/isosnapshot_nl.ts \
                 translations/isosnapshot_pl.ts \
                 translations/isosnapshot_pt.ts \
                 translations/isosnapshot_ru.ts \
+                translations/isosnapshot_sk.ts \
                 translations/isosnapshot_sv.ts 
-
+RESOURCES += \
+    images.qrc
 
 
